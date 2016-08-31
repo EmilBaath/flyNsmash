@@ -1,18 +1,18 @@
 package se.academy;
 
-import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.input.Key;
-import com.googlecode.lanterna.terminal.Terminal;
-
-import java.nio.charset.Charset;
 
 /**
  * Created by Emil Båth on 2016-08-31.
  */
 interface Screen {
-    void printScreen(World world, Screen screen) throws InterruptedException;
+    void printScreen(World world, Score score) throws InterruptedException;
     int numberOfRows();
     int numberOfColumns();
-    void closeScreen();
-    void printText(String text);
+    void printText(String text, int row);
+    void clearScreen();
+    void printStartMeny() throws InterruptedException;
+    void printHighScore();
+    Key readInput();
+    String readText() throws InterruptedException;
 }

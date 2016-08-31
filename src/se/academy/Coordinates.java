@@ -3,15 +3,14 @@ package se.academy;
 /**
  * Created by Emil Båth on 2016-08-30.
  */
-public class Point {
+public class Coordinates {
     private int xCoordinate;
     private int yCoordinate;
 
-    public Point(int xCoordinate, int yCoordinate) {
+    public Coordinates(int xCoordinate, int yCoordinate) {
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
 
-   // För att kunna rita ut skeppet.
     }
 
     public int getxCoordinate() {

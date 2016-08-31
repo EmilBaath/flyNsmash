@@ -49,7 +49,7 @@ abstract class SpaceObject {
 
     public SpaceObject(Screen screen) {
         this.xCoordinate = xValue.nextInt(screen.numberOfColumns() - 1);
-        this.yCoordinate = 0;
+        this.yCoordinate = 2;
 
         // konstruktorn till SpaceObjekt. Tar ett random X värde innanför teminalen och Y är = 0.
     }

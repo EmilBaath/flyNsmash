@@ -6,7 +6,6 @@ package se.academy;
 public class Score {
     private int score;
     private String name;
-
     public static Score[] highScores = new Score[10];
 
 
@@ -15,16 +14,8 @@ public class Score {
         this.name = "unnamed";
     }
 
-    public void addToScore (int score) {
-        this.score += score;
-    }
-
-    public void subtractFromScore(int score) {
-        this.score -= score;
-    }
-
     public void setName(String name) {
-        if (name != null) {
+        if (!name.equals("")) {
             this.name = name;
         }
     }
@@ -33,22 +24,27 @@ public class Score {
         return this.score;
     }
 
-    public  String getName() {
+    public String getName() {
         return this.name;
+    }
+
+    public void addToScore(int points) {
+        this.score += points;
     }
 
     public void addToHighScore() {
         for (int i = 0; i < 10; i++) {
-            if (highScores[i] == null || this.score >= highScores[i].getScore()) {
-                if (highScores[i] != null && this.score >= highScores[i].getScore() && i < 9) {
-                    highScores[i+1] = highScores[i];
-                }
+            if (highScores[i] != null && this.score > highScores[i].getScore() && i < 9) {
+                Score highScore = highScores[i];
+                highScores[i] = this;
+                highScore.addToHighScore();
+                break;
+            }
+            else if (highScores[i] == null) {
                 highScores[i] = this;
                 break;
             }
-            // Kollar ifall dina points är högra än de 10 högsta poängen. Isf hamnar du på highscore listan.
-
         }
-
     }
 }
+

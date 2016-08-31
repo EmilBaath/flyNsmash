@@ -1,7 +1,6 @@
 package se.academy;
 
 import com.googlecode.lanterna.input.Key;
-import com.sun.glass.events.KeyEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,48 +9,44 @@ import java.util.List;
  * Created by Emil Båth on 2016-08-30.
  */
 public class Ship {
-    Point center = new Point(49, 28);
-    int radius = 1;
+    Coordinates center = new Coordinates(49, 28);
+    int radius = 2;
 
     public void makeShipBigger() {
         radius += 1;
     }
-    // Gör radius på skeppet lite större.
+
     public void makeShipSmaller() {
         if (radius > 1)
             radius -= 1;
     }
-    // gör radius på skeppet lite mindre.
 
-    public void moveShip(Key key) {
-        Key.Kind k = key.getKind();
-        switch (k) {
-            case ArrowUp:
+    public void move(char direction) {
+        switch (direction) {
+            case 'U':
                 center.setyCoordinate(center.getyCoordinate() - 1);
                 break;
-            case ArrowDown:
+            case 'D':
                 center.setyCoordinate(center.getyCoordinate() +1);
                 break;
-            case ArrowLeft:
+            case 'L':
                 center.setxCoordinate(center.getxCoordinate() -1);
                 break;
-            case ArrowRight:
+            case 'R':
                 center.setxCoordinate(center.getxCoordinate() +1);
                 break;
-            // Rör ditt skepp.
         }
     }
 
-    public List<Point> generateListOfPointInShip() {
-        List<Point> points = new ArrayList<Point>();
+    public List<Coordinates> generateListOfCoordinates() {
+        List<Coordinates> coordinates = new ArrayList<>();
         for (int i = center.getxCoordinate() - radius; i <= center.getxCoordinate() + radius; i++) {
             for (int j = center.getyCoordinate() - radius; j <= center.getyCoordinate() + radius; j++) {
                 if (Math.sqrt(Math.pow(center.getxCoordinate() - i, 2) + Math.pow(center.getyCoordinate() - j, 2)) < radius) {
-                    points.add(new Point(i, j));
-                    //Lägger till punkter som ska ritas ut i skeppet.
+                    coordinates.add(new Coordinates(i, j));
                 }
             }
         }
-        return points;
+        return coordinates;
     }
 }
