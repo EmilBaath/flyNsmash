@@ -1,7 +1,5 @@
 package se.academy;
 
-import com.googlecode.lanterna.terminal.Terminal;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,19 +15,18 @@ public class World {
     Ship ship = new Ship();
 
 
-
-    public void updateWorld(Terminal terminal) {
-        movingItemsInWorld(terminal);
-        addSpaceObject(terminal );
+    public void updateWorld(Screen screen) {
+        movingItemsInWorld(screen);
+        addSpaceObject(screen);
         //Ger ett nytt fall och flyttar neråt.
     }
 
-    private void movingItemsInWorld(Terminal terminal) {
+    private void movingItemsInWorld(Screen screen) {
         for (Iterator<SpaceObject> iterator = itemsInWorld.iterator(); iterator.hasNext(); ) {
             SpaceObject spaceObject = iterator.next();
             // Iterator behövs för att kunna ta bort element i listan.
 
-            if (spaceObject.y >= terminal.getTerminalSize().getRows() - 1) {
+            if (spaceObject.getyCoordinate() >= screen.numberOfRows() - 1) {
                 iterator.remove();
                 // Tar bort object när de har kommit till botten.
             } else {
@@ -41,17 +38,17 @@ public class World {
         }
     }
 
-    private void addSpaceObject(Terminal terminal) {
+    private void addSpaceObject(Screen screen) {
         int randomNumber = generator.nextInt(3);
         switch (randomNumber) {
             case 0:
-                itemsInWorld.add(new Stone(terminal));
+                itemsInWorld.add(new Stone(screen));
                 break;
             case 1:
-                itemsInWorld.add(new Plus(terminal));
+                itemsInWorld.add(new Plus(screen));
                 break;
             case 2:
-                itemsInWorld.add(new Minus(terminal));
+                itemsInWorld.add(new Minus(screen));
                 break;
             // genererar alla stenar, + och - slumpmässigt.
         }

@@ -27,16 +27,16 @@ public class Ship {
         Key.Kind k = key.getKind();
         switch (k) {
             case ArrowUp:
-                center.y -= 1;
+                center.setyCoordinate(center.getyCoordinate() - 1);
                 break;
             case ArrowDown:
-                center.y += 1;
+                center.setyCoordinate(center.getyCoordinate() +1);
                 break;
             case ArrowLeft:
-                center.x -= 1;
+                center.setxCoordinate(center.getxCoordinate() -1);
                 break;
             case ArrowRight:
-                center.x += 1;
+                center.setxCoordinate(center.getxCoordinate() +1);
                 break;
             // Rör ditt skepp.
         }
@@ -44,9 +44,9 @@ public class Ship {
 
     public List<Point> generateListOfPointInShip() {
         List<Point> points = new ArrayList<Point>();
-        for (int i = center.x - radius; i <= center.x + radius; i++) {
-            for (int j = center.y - radius; j <= center.y + radius; j++) {
-                if (Math.sqrt(Math.pow(center.x - i, 2) + Math.pow(center.y - j, 2)) < radius) {
+        for (int i = center.getxCoordinate() - radius; i <= center.getxCoordinate() + radius; i++) {
+            for (int j = center.getyCoordinate() - radius; j <= center.getyCoordinate() + radius; j++) {
+                if (Math.sqrt(Math.pow(center.getxCoordinate() - i, 2) + Math.pow(center.getyCoordinate() - j, 2)) < radius) {
                     points.add(new Point(i, j));
                     //Lägger till punkter som ska ritas ut i skeppet.
                 }
