@@ -111,7 +111,6 @@ public class TerminalScreen implements Screen {
 
     @Override
     public String readText() throws InterruptedException {
-        terminal.setCursorVisible(true);
         String text = "";
         while (true) {
             Key key = null;
@@ -129,9 +128,18 @@ public class TerminalScreen implements Screen {
             } else {
                 text += key.getCharacter();
             }
+            clearRow(numberOfRows() / 2 + 1);
             printText(text, numberOfRows() / 2 + 1);
         }
         terminal.setCursorVisible(false);
         return text;
+    }
+
+    private void clearRow(int row) {
+        String s = "";
+        for (int i = 0; i < numberOfRows(); i ++) {
+            s += " ";
+        }
+        printText(s, row);
     }
 }
